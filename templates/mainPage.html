@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block main_page %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm wow animate__bounceIn">
+            <!-- Default form contact -->
+            <form class="text-center border border-light p-3 bg-dark" action="{% url 'advSearchResults' %}" method="GET"
+                autocomplete="off">
+                <p class="h4 text-center text-uppercase robotoBold text-warning">Advanced Search For Titles</p>
+                <hr>
+                <div class="row p-0 m-0">
+                    <div class="col">
+                        <!-- Material input -->
+                        <div class="md-form ml-2">
+                            <input type="number" id="numberExample" class="form-control text-white robotoBold"
+                                name="getimdb" step="0.1" value="7" min="1" max="10">
+                            <label for="numberExample" class="text-warning roboto small">Imdb Greater Than</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="md-form mr-2">
+                            <input type="number" id="yearid" class="form-control text-white robotoBold" name="getyear"
+                                   min="1970" max="2020" value="2000">
+                            <label for="yearid" class="text-warning roboto small">Year After</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-0 m-0">
+                    <div class="col">
+                        <!-- Material input -->
+                        <div class="md-form ml-2">
+                            <input type="text" id="formStars" class="form-control text-white robotoBold" name="getStar">
+                            <label for="formStars" class="text-warning roboto small">Stars</label>
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="md-form mr-2">
+                            <input type="text" id="textKey" class="form-control text-white robotoBold"
+                                name="getKeywords">
+                            <label for="textKey" class="text-warning roboto small">Keywords</label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row p-0 m-0 mb-3">
+                    <select class="browser-default custom-select mb-4 bg-dark
+                        text-white robotoBold w-50 mr-3 mt-3 ml-3 decorated" name="getgenre">
+                        <option value="" class="text-warning" disabled>Select the Genre</option>
+                        <option value="All" selected>All</option>
+                        <option value="Action">Action</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Comedy">Comedy</option>
+                        <option value="Adventure">Adventure</option>
+                        <option value="Horror">Horror</option>
+                        <option value="Thriller">Thriller</option>
+                        <option value="Sci-Fi">Sci-Fi</option>
+                        <option value="Mystery">Mystery</option>
+                        <option value="Family">Family</option>
+                        <option value="Fantasy">Fantasy</option>
+                        <option value="Crime">Crime</option>
+                    </select>
+                    <div class="radio-toolbar m-0 p-0 mt-3">
+                        <input type="radio" id="byimbd" name="inlineDefaultRadios" value="byimdb" class="mr-2" checked>
+                        <label for="byimbd" class="robotoBold">By IMDb</label>
+
+                        <input type="radio" id="byyear" name="inlineDefaultRadios" value="byyear">
+                        <label for="byyear" class="robotoBold">By Year</label>
+
+                    </div>
+                </div>
+                <!-- Send button -->
+                <button class="btn btn-dark btn-block text-warning border border-warning" type="submit" id="myBtn"
+                    style="font-family: 'Oswald', sans-serif;">Submit</button>
+
+            </form>
+            <!-- Default form contact -->
+        </div>
+        <div class="col-sm">
+
+        </div>
+    </div>
+</div>
+{% endblock %}

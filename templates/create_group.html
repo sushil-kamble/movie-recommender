@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+
+{% block create_group %}
+<!-- Default form register -->
+<div class="container" style="background-color: rgba(20, 20, 20, 0.5);">
+    <form class="p-2 text-white" method="POST">
+        {% csrf_token %}
+        <p class="h3 mb-1 robotoBold text-warning"><i class="fas fa-users mr-2" aria-hidden="true"></i>Create Group</p>
+        <hr class="bg-white">
+        <div class="robotoBold">
+            <!-- Username -->
+            {{ form.name|as_crispy_field }}
+        </div>
+        <div class="robotoBold">
+            <!-- E-mail -->
+            {{ form.groupID|as_crispy_field }}
+        </div>
+        <!-- Sign up button -->
+        <button class="btn btn-outline-warning my-2 btn-block" type="submit">Create</button>
+    </form>
+    
+</div>
+
+<!-- Default form register -->
+{% endblock %}

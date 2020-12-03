@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+
+{% block loginblock %}
+    <div class="container mt-4" style="max-width: 600px!important;">
+        <form method="POST" class="robotoBold">
+            {% csrf_token %}
+            <fieldset class="form-group text-white">
+                <legend class="border-bottom mb-4 text-warning h4">Login</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button type="submit" class="btn btn-outline-warning btn-block">Sign In</button>
+            </div>
+            <div class="border-top pt-3">
+                <small class="text-muted">Need a Account?</small>
+                <a href="{% url 'register' %}" class="ml-2 text-warning">Register Here</a><hr>
+            </div>
+        </form>
+    </div>
+{% endblock %}

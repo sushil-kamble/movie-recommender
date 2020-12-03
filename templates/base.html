@@ -1,0 +1,330 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommender</title>
+    <link rel="icon" type="image/png" sizes="50x50" href="{% static 'favicon/thumb2.png' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mdb.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/addons/datatables.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/addons/datatables-select.min.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald|Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Galada&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+<div class="loading-screen">
+    <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<div class="background-transform-dark" style="background-image: url(/static/img/netflix.jpg);">
+    <!-- Material form subscription -->
+    <div class="container-fluid mb-3">
+        <nav class="container navbar navbar-expand-lg" style="background-color: rgba(41,43,44,1)">
+
+            <!-- Navbar brand -->
+            <a class="navbar-brand mr-3" href="/" style="font-family: 'Oswald', sans-serif;text-transform: uppercase;
+                    color:#ffce00">Movie Recommender</a>
+
+            <!-- Collapse button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+                    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Collapsible content -->
+            <div class="collapse navbar-collapse" id="basicExampleNav">
+
+                <!-- Links -->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active mr-2 ml-2">
+                        <a class="nav-link" href="{% url 'home' %}"
+                           style="color:#ffce00;font-family: 'Oswald', sans-serif;">Graphs
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+
+                    <!-- Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle mr-2" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false"
+                           style="color:#ffce00;font-family: 'Oswald', sans-serif;">Genre</a>
+                        <div class="dropdown-menu dropdown-primary bg-dark" aria-labelledby="navbarDropdownMenuLink"
+                             style="width: 45% !important;">
+                            <a class="dropdown-item d-flex justify-content-center hover-dropdown" href="#">
+                                <form action="{% url 'genre' %}" method="GET" class="text-center bg-dark">
+                                    <input type="hidden" value="Action" name="typeGenre">
+                                    <button class="my-genre-button" type="submit">Action
+                                    </button>
+                                </form>
+                            </a>
+                            <a class="dropdown-item d-flex justify-content-center hover-dropdown" href="#">
+                                <form action="{% url 'genre' %}" method="GET" class="text-center bg-dark">
+                                    <input type="hidden" value="Comedy" name="typeGenre">
+                                    <button class="my-genre-button" type="submit">Comedy
+                                    </button>
+                                </form>
+                            </a>
+                            <a class="dropdown-item d-flex justify-content-center hover-dropdown" href="#">
+                                <form action="{% url 'genre' %}" method="GET" class="text-center bg-dark">
+                                    <input type="hidden" value="Adventure" name="typeGenre">
+                                    <button class="my-genre-button" type="submit">Adventure
+                                    </button>
+                                </form>
+                            </a>
+                            <a class="dropdown-item d-flex justify-content-center hover-dropdown" href="#">
+                                <form action="{% url 'genre' %}" method="GET" class="text-center bg-dark">
+                                    <input type="hidden" value="Sci-Fi" name="typeGenre">
+                                    <button class="my-genre-button" type="submit">Sci-Fi
+                                    </button>
+                                </form>
+                            </a>
+                            <a class="dropdown-item d-flex justify-content-center hover-dropdown" href="#">
+                                <form action="{% url 'genre' %}" method="GET" class="text-center bg-dark">
+                                    <input type="hidden" value="Thriller" name="typeGenre">
+                                    <button class="my-genre-button" type="submit">Thriller
+                                    </button>
+                                </form>
+                            </a>
+                            <a class="dropdown-item d-flex justify-content-center hover-dropdown" href="#">
+                                <form action="{% url 'genre' %}" method="GET" class="text-center bg-dark">
+                                    <input type="hidden" value="Mystery" name="typeGenre">
+                                    <button class="my-genre-button" type="submit">Mystery
+                                    </button>
+                                </form>
+                            </a>
+                            <a class="dropdown-item d-flex justify-content-center hover-dropdown" href="#">
+                                <form action="{% url 'genre' %}" method="GET" class="text-center bg-dark">
+                                    <input type="hidden" value="Drama" name="typeGenre">
+                                    <button class="my-genre-button" type="submit">Drama
+                                    </button>
+                                </form>
+                            </a>
+                            <a class="dropdown-item d-flex justify-content-center hover-dropdown" href="#">
+                                <form action="{% url 'genre' %}" method="GET" class="text-center bg-dark">
+                                    <input type="hidden" value="Animation" name="typeGenre">
+                                    <button class="my-genre-button" type="submit">Animation
+                                    </button>
+                                </form>
+                            </a>
+                            <a class="dropdown-item d-flex justify-content-center hover-dropdown" href="#">
+                                <form action="{% url 'genre' %}" method="GET" class="text-center bg-dark">
+                                    <input type="hidden" value="Family" name="typeGenre">
+                                    <button class="my-genre-button" type="submit">Family
+                                    </button>
+                                </form>
+                            </a>
+                            <a class="dropdown-item d-flex justify-content-center hover-dropdown" href="#">
+                                <form action="{% url 'genre' %}" method="GET" class="text-center bg-dark">
+                                    <input type="hidden" value="Fantasy" name="typeGenre">
+                                    <button class="my-genre-button" type="submit">Fantasy
+                                    </button>
+                                </form>
+                            </a>
+                            <a class="dropdown-item d-flex justify-content-center hover-dropdown" href="#">
+                                <form action="{% url 'genre' %}" method="GET" class="text-center bg-dark">
+                                    <input type="hidden" value="Horror" name="typeGenre">
+                                    <button class="my-genre-button" type="submit">Horror
+                                    </button>
+                                </form>
+                            </a>
+                            <a class="dropdown-item d-flex justify-content-center hover-dropdown" href="#">
+                                <form action="{% url 'genre' %}" method="GET" class="text-center bg-dark">
+                                    <input type="hidden" value="Crime" name="typeGenre">
+                                    <button class="my-genre-button" type="submit">Crime
+                                    </button>
+                                </form>
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle mr-2" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false"
+                           style="color:#ffce00;font-family: 'Oswald', sans-serif;">Specials</a>
+                        <div class="dropdown-menu dropdown-primary bg-dark"
+                             aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item text-center hover-dropdown-sp robotoBold" style="color:#ffce00;"
+                               href="{% url 'all' %}">All Titles</a>
+                            <a class="dropdown-item text-center hover-dropdown-sp robotoBold" style="color:#ffce00;"
+                               href="{% url 'allSeries' %}">All Series</a>
+                            <a class="dropdown-item text-center hover-dropdown-sp robotoBold" style="color:#ffce00;"
+                               href="{% url 'top100' %}">Top 100 </a>
+                        </div>
+                    </li>
+
+                    <!-- Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle mr-2" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false"
+                           style="color:#ffce00;font-family: 'Oswald', sans-serif;">Available on</a>
+                        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink"
+                             style="width: 50% !important; padding: 5px!important; margin: 5px!important;">
+                            <a class="dropdown-item d-flex justify-content-center hover-dropdown" href="#">
+                                <form action="{% url 'genre' %}" method="GET" class="text-center bg-dark">
+                                    <input type="hidden" value="Netflix" name="typeGenre">
+                                    <button class="my-genre-buttonv2" type="submit">Netflix
+                                    </button>
+                                </form>
+                            </a>
+                        </div>
+                    </li>
+
+                </ul>
+                <!-- Links -->
+                <div class="my-0">
+                    <ul class="navbar-nav mr-auto">
+                        {% if user.is_authenticated %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle mr-2" id="navbarDropdownMenuLink"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                   style="color:#ffce00;font-family: 'Oswald', sans-serif;">
+                                    <i class="fas fa-user mr-2"></i>{{ user.username }}</a>
+                                <div class="dropdown-menu dropdown-primary bg-dark"
+                                     aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item hover-dropdown-sp robotoBold"
+                                       style="color:#ffce00;" href="{% url 'home' %}"><i
+                                            class="fas fa-address-card mr-2"></i>Profile </a>
+                                    <a class="dropdown-item hover-dropdown-sp robotoBold"
+                                       style="color:#ffce00;" href="{% url 'watchlist' %}"><i
+                                            class="fas fa-address-card mr-2"></i>Watchlist </a>
+                                    <a class="dropdown-item hover-dropdown-sp robotoBold"
+                                       style="color:#ffce00;" href="{% url 'myReviews' %}"><i
+                                            class="fas fa-poll mr-2"></i>Reviews</a>
+                                    <a class="dropdown-item hover-dropdown-sp robotoBold"
+                                       style="color:#ffce00;" href="{% url 'logout' %}"><i
+                                            class="fas fa-sign-out-alt mr-2"></i> Log out</a>
+                                </div>
+                                {% else %}
+                            <li class="nav-item mr-2">
+                                <a class="nav-link" href="{% url 'login' %}"
+                                   style="color:#ffce00;font-family: 'Oswald', sans-serif;">
+                                    <i class="fas fa-sign-in-alt"></i> Login
+                                </a>
+                            </li>
+                            <li class="nav-item mr-2">
+                                <a class="nav-link" href="{% url 'register' %}"
+                                   style="color:#ffce00;font-family: 'Oswald', sans-serif;">
+                                    <i class="fas fa-file-signature"></i> Register
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+            <!-- Collapsible content -->
+
+        </nav>
+        <!-- Material form subscription -->
+        <div class="container mt-1">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        <strong>{{ message }}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="mt-5">
+            {% block registerblock %}
+            {% endblock %}
+
+            {% block loginblock %}
+            {% endblock %}
+
+            {% block logoutblock %}
+            {% endblock %}
+
+            {% block homePage %}
+            {% endblock %}
+
+            {% block confirm_delete %}
+            {% endblock %}
+
+            {% block form_page %}
+            {% endblock %}
+
+            {% block reviews_page %}
+            {% endblock %}
+
+            {% block my_reviews_page %}
+            {% endblock %}
+
+            {% block watchlist_page %}
+            {% endblock %}
+
+            {% block watchlistconfirm_page %}
+            {% endblock %}
+
+            {% block main_page %}
+            {% endblock %}
+
+            {% block genre_page %}
+            {% endblock %}
+
+            {% block all_page %}
+            {% endblock %}
+
+            {% block top100_page %}
+            {% endblock %}
+
+            {% block series_page %}
+            {% endblock %}
+
+            {% block key_page %}
+            {% endblock %}
+
+            {% block result_page %}
+            {% endblock %}
+
+            {% block advsearchresults %}
+            {% endblock %}
+
+            {% block group_status %}
+            {% endblock %}
+
+            {% block create_group %}
+            {% endblock %}
+
+            {% block join_group %}
+            {% endblock %}
+
+            {% block member_group %}
+            {% endblock %}
+
+            {% block 403_page %}
+            {% endblock %}
+
+            {% block 404_page %}
+            {% endblock %}
+        </div>
+
+    </div>
+</div>
+</body>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/modules/wow.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/addons/datatables.min.js' %}"></script>
+<script src="{% static 'js/addons/datatables-select.min.js' %}"></script>
+<script src="{% static 'js/mdb.min.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
+
+</html>

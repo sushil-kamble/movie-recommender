@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block confirm_delete %}
+    <div class="container secondary-bg-fade pb-3">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4 robotoBold text-danger ml-2">Delete Review</legend>
+                <h3 class="h4-responsive ml-2 robotoItalic text-white">Are you sure you want to delete the Review for
+                <span class="robotoBold text-danger">"{{ object.movie }}"</span></h3>
+            </fieldset>
+            <div class="form-group">
+                <button type="submit" class="btn btn-outline-danger">Yes, Delete</button>
+                <a href="{% url 'review-detail' object.id %}" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

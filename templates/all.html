@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block all_page %}
+    <!-- Material form subscription -->
+        <div class="container" style="height: 34rem; overflow-x: hidden; overflow-y: auto;">
+            <table class="table table-bordered">
+            <caption class="h4 text-white robotoItalic">{{ dfList|length }} results are present in the Table</caption>
+                <thead>
+                    
+                    <th class="text-uppercase roboto text-white">IMDB NO</th>
+                    <th class="text-uppercase text-white">
+                        <span class="roboto font-weight-bold float-sm-left" >Title</span>
+                        <span class="oswald-font-it float-sm-right small mt-2" >{{ dfList|length }} results queried</span>
+                    </th>
+                    <th class="text-uppercase roboto text-white">Rating</th>
+                    <th class="text-uppercase roboto text-white">link</th>
+                    
+                </thead>
+                <tbody>
+                    {% for topm in dfList %}
+                    <tr class="my-title-button">
+                        <td class="oswald text-white">{{topm.0}}</td>
+                        <td class="oswald text-white" style="margin: 5px !important; padding: 5px !important;">
+                            <form action="result" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{topm.1}}" name="movie">
+                                <button type="submit" class="h5 my-movie-button">
+                                    <span class="font-weight-bold oswald float-sm-left" >{{ topm.1 }}</span>
+                                    <span class="font-weight-bold oswald-font-it float-sm-right small mt-3" >{{ topm.12 }} {{ topm.8 }}</span>
+                                </button>
+                            </form>
+                        </td>
+                        <td class="oswald h4">
+                            <form action="review/" method="GET">
+                                <input type="hidden" value="{{topm.1}}" name="movie">
+                                <button type="submit" class="btn btn-sm btn-block m-0 p-0 my-movie-button">
+                                    <span class="h4"><i class="fas fa-star mr-1"></i>{{topm.2}}</span>
+                                </button>
+                            </form>
+                        </td>
+                        <td class="oswald-font-it"><a href="{{topm.3}}" target="_blank" class="text-white">{{topm.3}}</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+{% endblock %}

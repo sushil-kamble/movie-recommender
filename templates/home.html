@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block homePage %}
+    <div class="container">
+        <h1 class="text-warning oswald text-uppercase">Rating Vs Normalized Number of Rating</h1>
+        <img src="data:image/png;base64,{{ graph1 }}" alt="" width="900" height="600">
+        <h1 class="text-warning oswald text-uppercase mt-3">Genre vs Average Normalized Number of Rating</h1>
+        <img src="data:image/png;base64,{{ graph2 }}" alt="" width="900" height="600">
+        <h1 class="text-warning oswald text-uppercase mt-3">Genre vs IMDB rating</h1>
+        <img src="data:image/png;base64,{{ graph3 }}" alt="" width="900" height="600">
+        <h1 class="text-warning oswald text-uppercase mt-3">Years vs Average IMDB Rating</h1>
+        <img src="data:image/png;base64,{{ graph4 }}" alt="" width="900" height="600">
+        <h1 class="text-warning oswald text-uppercase mt-3">PIE: Average Normalized Number of Rating</h1>
+        <img src="data:image/png;base64,{{ graph5 }}" alt="" width="900" height="600">
+        <h1 class="text-warning oswald text-uppercase mt-3">HISTOGRAM: IMDB Rating vs Number of movies'</h1>
+        <img src="data:image/png;base64,{{ graph6 }}" alt="" width="900" height="600">
+    </div>
+{% endblock %}
+

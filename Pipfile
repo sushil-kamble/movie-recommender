@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+pandas = "*"
+requests = "*"
+beautifulsoup4 = "*"
+django-crispy-forms = "*"
+matplotlib = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"

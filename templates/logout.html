@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block logoutblock %}
+    <div class="container d-flex justify-content-center">
+        <div class="border-top pt-3">
+            <small class="text-muted h5">Want to login in again?</small>
+            <a href="{% url 'login' %}" class="ml-2 h4 text-warning">Log in</a>
+        </div>
+    </div>
+{% endblock %}

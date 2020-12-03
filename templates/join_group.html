@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block join_group %}
+<!-- Default form register -->
+<div class="container" style="background-color: rgba(20, 20, 20, 0.5);">
+    <form class="p-2 text-white" method="POST">
+        {% csrf_token %}
+        <p class="h3 mb-1 robotoBold text-warning"><i class="fas fa-users mr-2" aria-hidden="true"></i>Join Group</p>
+        <hr class="bg-white">
+        <div class="robotoBold">
+            <!-- Default input -->
+            <label for="exampleForm6">Group Id</label>
+            <input type="text" id="exampleForm6" class="form-control" name="group_id">
+        </div>
+        <!-- Sign up button -->
+        <button class="btn btn-outline-warning my-2 btn-block" type="submit">Join</button>
+    </form>
+    
+</div>
+
+<!-- Default form register -->
+{% endblock %}

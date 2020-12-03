@@ -1,0 +1,236 @@
+* {box-sizing:border-box}
+body, html {padding:0; margin:0} 
+body {background:#232323; color:#fff}
+.opaque {position:absolute; top:0; left:0; right:0; bottom:0; opacity:0; background:#d2d6f1;}
+.lt-ie9 .opaque {display:none;}
+.feature {position:fixed; top:0; z-index:0; width:100%; padding-top:50%; background: url(../img/b8.png) no-repeat center center;
+    -webkit-background-size:250%;
+       -moz-background-size:250%;
+         -o-background-size:250%;
+            background-size:130%;
+    -webkit-box-shadow: 0 -50px 20px -20px #232323 inset;
+       -moz-box-shadow: 0 -50px 20px -20px #232323 inset;
+            box-shadow: 0 -50px 20px -20px #232323 inset;
+  }
+.content {position:relative; z-index:1; padding-top:45%; width:90%; margin:0 auto;}
+
+@media only screen and (min-width:36.250em) {
+  .content {width:60%; padding-top:35% }
+}
+
+.back {
+  transition: all .3s ease-in-out; 
+  background-color:rgba(0, 0, 0, 0.7) !important;
+  transform: scale(1.03);
+}
+
+.tran_back {
+  background-color: transparent;
+  transition: all .3s ease-in-out; 
+}
+
+.text-center {
+  text-align: center;
+}
+
+#menu-toggle {
+  display: none;
+}
+
+.dflex {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu {
+  position: fixed;
+  z-index: 999;
+  right: 0;
+  width: 250px;
+  height: 100vh;
+  padding: 15px 0;
+  justify-content: space-between;
+  transition: right 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.menu .animation, .menu .element {
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  animation: scale-to-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+.menu #logoCSS3, .menu .element {
+  z-index: 1;
+}
+.menu, .menu html, .menu body {
+  overflow-x: hidden;
+}
+.menu .element, .menu .menu-btn {
+  cursor: pointer;
+}
+.menu, .menu #logoCSS3, .menu .element, .menu .menu-btn {
+  color: #FFFFFF;
+}
+.menu #logoCSS3, .menu .element, .menu .menu-container-btn, .menu .menu-toggle-btn {
+  position: relative;
+}
+.menu .menu-btn, .menu .menu-toggle-btn:after, .menu .menu-toggle-btn:before {
+  position: absolute;
+}
+.menu .fa-bars {
+  display: none;
+}
+.menu .fa-close {
+  display: block;
+}
+.menu #logoCSS3, .menu .elements-container {
+  padding: 0 10px 0 25px;
+}
+.menu #logoCSS3 {
+  font-size: 4em;
+  max-width: 250px;
+}
+.menu .elements-container {
+  max-height: 47vh;
+  overflow-y: auto;
+}
+.menu .elements-container .element {
+  text-decoration: none;
+  padding: 10px 0 10px 10px;
+}
+.menu .elements-container .element:hover {
+  background-color: black;
+}
+.menu .menu-container-btn {
+  overflow: hidden;
+  width: 70px;
+  padding: 35px 0;
+  box-shadow: 609px 0 0 600px rgba(20, 20, 20, 0.85);
+  /* main nav area */
+}
+.menu .menu-container-btn .menu-toggle-btn {
+  height: 70px;
+  border-radius: 0 50% 50% 0;
+  box-shadow: 43px 0 0 0 rgba(20, 20, 20, 0.85);
+}
+.menu .menu-container-btn .menu-toggle-btn:after, .menu .menu-container-btn .menu-toggle-btn:before {
+  z-index: -1;
+  width: 100%;
+  height: 50px;
+  left: 0;
+  content: ' ';
+}
+.menu .menu-container-btn .menu-toggle-btn:after {
+  top: 0;
+  border-radius: 0 0 0 100%;
+  box-shadow: 8px -43px 0px 0px rgba(20, 20, 20, 0.85);
+}
+.menu .menu-container-btn .menu-toggle-btn:before {
+  bottom: -86px;
+  border-radius: 100% 0 0 0;
+  box-shadow: 8px -43px 0px 0px rgba(20, 20, 20, 0.85);
+}
+.menu .menu-container-btn .menu-toggle-btn .menu-btn {
+  text-shadow: 0 0 5px black;
+  padding: 14px 16px;
+  left: 14px;
+  top: 13px;
+  background-color: red;
+  /* cross sign */
+  border: none;
+  border-radius: 50%;
+}
+
+#menu-toggle:checked + .menu {
+  right: -185px;
+}
+#menu-toggle:checked + .menu #logoCSS3, #menu-toggle:checked + .menu .elements-container {
+  padding: 0 25px 0 65px;
+}
+#menu-toggle:checked + .menu .fa-close {
+  display: none;
+}
+#menu-toggle:checked + .menu .fa-bars {
+  display: block;
+}
+#menu-toggle:checked + .menu .animation, #menu-toggle:checked + .menu .element {
+  animation: none;
+  opacity: 0;
+}
+#menu-toggle:checked + .menu .menu-container-btn {
+  box-shadow: 640px 0 0 600px orangered; 
+  /* side bar color */
+}
+#menu-toggle:checked + .menu .menu-container-btn .menu-toggle-btn {
+  border-radius: 50% 0 0 50%;
+  background: radial-gradient(ellipse at center, orangered 0%, orangered 35%, orangered 56%, orangered 100%);
+  box-shadow: 76px 0 0 50px orangered;
+}
+#menu-toggle:checked + .menu .menu-container-btn .menu-toggle-btn:after, #menu-toggle:checked + .menu .menu-container-btn .menu-toggle-btn:before {
+  left: 21px;
+  width: 20px;
+}
+#menu-toggle:checked + .menu .menu-container-btn .menu-toggle-btn:after {
+  top: -48px;
+  border-radius: 0 0 100% 0;
+  box-shadow: 12px 1px 0 10px orangered;
+}
+#menu-toggle:checked + .menu .menu-container-btn .menu-toggle-btn:before {
+  top: 68px;
+  border-radius: 0 100% 0 0;
+  box-shadow: 12px 3px 0 12px orangered;
+}
+#menu-toggle:checked + .menu .menu-container-btn .menu-toggle-btn .menu-btn {
+  background-color: black;
+  box-shadow: 0 0 0 12px orangered;
+}
+
+@keyframes scale-to-right {
+  0% {
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+.element:nth-child(1n) {
+  animation-delay: 0.25s;
+}
+
+.element:nth-child(2n) {
+  animation-delay: 0.5s;
+}
+
+.element:nth-child(3n) {
+  animation-delay: 0.75s;
+}
+
+.element:nth-child(4n) {
+  animation-delay: 1s;
+}
+
+.element:nth-child(5n) {
+  animation-delay: 1.25s;
+}
+
+.element:nth-child(6n) {
+  animation-delay: 1.5s;
+}
+
+.element:nth-child(7n) {
+  animation-delay: 1.75s;
+}
+
+.element:nth-child(8n) {
+  animation-delay: 2s;
+}
+
+.element:nth-child(9n) {
+  animation-delay: 2.25s;
+}
+
+.element:nth-child(10n) {
+  animation-delay: 2.5s;
+}

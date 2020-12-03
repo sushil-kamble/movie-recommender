@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block watchlist_page %}
+<div class="container text-white">
+    <table id="myWatchTable" class="table table-bordered" cellspacing="0" width="100%">
+        <thead>
+
+            <th class="text-uppercase roboto text-white">IMDB NO</th>
+            <th class="text-uppercase text-white">
+                <span class="roboto font-weight-bold float-sm-left">Title</span>
+                <span class="oswald-font-it float-sm-right small mt-2">Top 100</span>
+            </th>
+            <th class="text-uppercase roboto text-white">Rating</th>
+            <th class="th-sm text-uppercase">
+                <span class="font-weight-bold float-sm-left robotoBold mt-1 text-white">
+                    Genre
+                </span>
+                <div class="md-form md-outline form-sm bg-dark float-lg-right m-0 p-0 "
+                    style="height: 30px !important;">
+                    <input id="myInputTextField" class="form-control form-control-sm text-white robotoBold" type="text">
+                    <label for="myInputTextField" class="text-white bg-dark roboto ml-1">SEARCH TITLES</label>
+                </div>
+            </th>
+            <th class="text-uppercase roboto text-white">
+                Remove
+            </th>
+
+        </thead>
+        <tbody class="text-white">
+            {% for myTitle in list_user_watchlist %}
+            <tr class="my-title-button">
+                <td class="oswald text-white">{{myTitle.1}}
+
+                </td>
+                <td class="oswald text-white" style="margin: 5px !important; padding: 5px !important;">
+                    <form action="{% url 'result' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{myTitle.0}}" name="movie" id="my_title">
+                        <button type="submit" class="h5 my-movie-button">
+                            <span class="font-weight-bold oswald float-sm-left">{{ myTitle.0 }}</span>
+                            <span class="font-weight-bold oswald-font-it float-sm-right small mt-3">{{ myTitle.12 }}
+                                {{ myTitle.8 }}</span>
+                        </button>
+                    </form>
+                </td>
+                <td class="oswald h4">
+                    <form action="{% url 'review' %}" method="GET">
+                        <input type="hidden" value="{{myTitle.0}}" name="movie">
+                        <button type="submit" class="btn btn-sm btn-block m-0 p-0 my-movie-button">
+                            <span class="h4"><i class="fas fa-star mr-1"></i>{{myTitle.2}}</span>
+                        </button>
+                    </form>
+                </td>
+                <td class="oswald-font-it h5">{{myTitle.5}}</td>
+                <td>
+                    <form action="{% url 'watchlist' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" value="deletE{{myTitle.0}}" name="movie" id="my_title">
+                        <button type="button" class="bg-danger" data-toggle="modal" data-target="#{{myTitle.1}}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="{{myTitle.1}}" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header text-warning bg-dark">
+                                        <h5 class="modal-title robotoBold" id="exampleModalLabel">Remove from Watchlist</h5>
+                                        <button type="button" class="close text-warning" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <span class="text-dark robotoItalic">Are you sure your want to Remove
+                                            <span class="text-danger h5"> "{{myTitle.0}}"</span>
+                                            from your Watchlist
+                                        </span>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="/review/?movie={{ myTitle.0 }}"
+                                           class="btn btn-outline-primary robotoBold mr-1">Review</a>
+                                        <button type="button" class="btn btn-outline-teal robotoBold" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-outline-danger robotoBold">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

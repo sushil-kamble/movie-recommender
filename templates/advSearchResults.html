@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block advsearchresults %}
+
+{% include 'movielist.html' %}
+
+<div class="container">
+<span class="oswald-font-it float-sm-left mt-2 text-white text-capitalize" >
+        by genre = '{{ getgenre }}', by stars = '{{ getStar }}', by keyword = '{{ getKeywords }}',
+        after year {{ getyear }}, IMDB greater than {{ getimdb }},
+        arranged {{ sorting }}, {{ movieLen }} results queried
+</span>
+</div>
+
+{% endblock %}
