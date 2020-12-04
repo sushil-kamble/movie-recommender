@@ -16,7 +16,6 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/addons/datatables-select.min.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald|Lato" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Galada&display=swap" rel="stylesheet">
-
 </head>
 
 <body>
@@ -50,7 +49,7 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active mr-2 ml-2">
                         <a class="nav-link" href="{% url 'home' %}"
-                           style="color:#ffce00;font-family: 'Oswald', sans-serif;">Graphs
+                           style="color:#ffce00;font-family: 'Oswald', sans-serif;">Trends
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
@@ -296,16 +295,7 @@
             {% block advsearchresults %}
             {% endblock %}
 
-            {% block group_status %}
-            {% endblock %}
-
-            {% block create_group %}
-            {% endblock %}
-
-            {% block join_group %}
-            {% endblock %}
-
-            {% block member_group %}
+            {% block recommendation_page %}
             {% endblock %}
 
             {% block 403_page %}

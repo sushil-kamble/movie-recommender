@@ -7,9 +7,12 @@ name = "pypi"
 django = "*"
 pandas = "*"
 requests = "*"
-beautifulsoup4 = "*"
 django-crispy-forms = "*"
 matplotlib = "*"
+joblib = "*"
+scikit-learn = "*"
+numpy = "==1.19.3"
+bs4 = "*"
 
 [dev-packages]
 

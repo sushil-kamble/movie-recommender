@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block recommendation_page %}
+<div class="container text-white">
+    <table id="myRecTable" class="table table-bordered text-uppercase" cellspacing="0" width="100%">
+        <thead>
+            <th class="roboto">
+             a   <span class="font-weight-bold float-sm-left robotoBold mt-1 text-white">
+                    MOVIE
+                </span>
+                <div class="md-form md-outline form-sm bg-dark float-lg-right m-0 p-0 "
+                    style="height: 30px !important;">
+                    <input id="myRecInputTextField" class="form-control form-control-sm text-white robotoBold" type="text">
+                    <label for="myRecInputTextField" class="text-white bg-dark roboto ml-1">SEARCH TITLES</label>
+                </div>
+            </th>
+            <th class="th-sm text-white roboto">
+                Value
+            </th>
+
+        </thead>
+        <tbody class="text-white">
+            {% for movie in rec %}
+            <tr class="my-title-button">
+                <td class="oswald text-white">
+                    {{movie.0}}
+                </td>
+                <td class="oswald text-white">
+                    {{movie.1}}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

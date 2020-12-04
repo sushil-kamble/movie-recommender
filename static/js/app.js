@@ -39,6 +39,21 @@ oTable = $('#myWatchTable').DataTable({
 $('#myInputTextField').keyup(function () {
   oTable.search($(this).val()).draw();
 })
+
+rTable = $('#myRecTable').DataTable({
+  "paging": false,
+  "scrollY": "390px",
+  "scrollCollapse": true,
+  "aaSorting": [],
+    columnDefs: [{
+      orderable: false,
+      targets: 0
+    }],
+  "dom": "lrtip"
+});   //pay attention to capital D, which is mandatory to retrieve "api" datatables' object, as @Lionel said
+$('#myRecInputTextField').keyup(function () {
+  rTable.search($(this).val()).draw();
+})
 //init
 
 
@@ -65,7 +80,7 @@ $(document).ready(function () {
       $('.reveal').removeClass('animate__fadeInRight');
       $('.reveal').addClass('animate__rotateOut animate__faster');
       setTimeout(() => { $('.reveal').addClass('d-none'); }, 500);
-      // $('.reveal').addClass('d-none');  
+      // $('.reveal').addClass('d-none');
     });
 });
 
