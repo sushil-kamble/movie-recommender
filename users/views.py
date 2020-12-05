@@ -52,6 +52,12 @@ class PostDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = Review
     template_name = 'post_detail.html'
 
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return True
+
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Review

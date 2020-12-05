@@ -1,82 +1,55 @@
 {% extends 'base.html' %}
 
 {% block result_page %}
-
-{% if toggle == True and not imdbno %}
-    <h1 class="text-center text-uppercase" 
-    style="background-color: #484d5c; color:#ffce00; font-family: 'Anton', cursive;">Normal mode on</h1>
-{% elif toggle == False and not imdbno %}
-    <h1 class="text-center text-uppercase" 
-    style="background-color: #484d5c; color:#ffce00; font-family: 'Anton', cursive;">Global mode on</h1>
-    <h3 class="text-center text-uppercase oswald-font-it container-fluid" 
-    style="background-color: #484d5c; color:#ffce00;">Now Search which ever movie you want, This mode 
-will comparatively give faster results as all the data will come from the Web. Images have been removed for
-    faster speed</h3>
-{% else %}
     <div class="loading-screen">
-<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-</div>
-    {% if not notpresent %}
-        {% if back == True %}
-    <div class="container-fluid background-transform-results flex-center" style="background-image: url({{background}});">
-        <div class="container">
-
-        {% else %}
-    <div class="container-fluid background-transform-results flex-center" style="background-image: url(../static/img/allmovies.jpg);">
-        <div class="container">
-        {% endif %}
-        <div class="container ml-3" style="background-color: rgba(72, 77, 92, 0.5);">
-            <a class="pb-3" href="#" onclick="goBack()" id="revealonhover" style="color:#ffce00;">
-                <div class="d-flex justify-content-center">
-                    <h3><i class="fa fa-arrow-left"></i>
-                    <span class="reveal d-none ml-3 animate__animated" style="font-family: 'Oswald', sans-serif;">Back</span></h3>
-                </div>
-            </a>
+        <div class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-            <div class="row">
-                {% if toggle == True or img_imdb %}
-                <div class="col-md-4 d-flex justify-content-center">  
-                    <img src="{{img_imdb}}" alt="Movie" class="pt-2 img-fluid" style="height: 600px;">
+    </div>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="container" style="background-color: rgba(72, 77, 92, 0.5);">
+                <a class="pb-3" href="#" onclick="goBack()" id="revealonhover" style="color:#ffce00;">
+                    <div class="d-flex justify-content-center">
+                        <h3><i class="fa fa-arrow-left"></i>
+                            <span class="reveal d-none animate__animated"
+                                  style="font-family: 'Oswald', sans-serif;">Back</span></h3>
+                    </div>
+                </a>
+            </div>
+            <div class="row" style="background-image: url({{ background }}); background-size: cover;">
+                <div class="col-md-4 d-flex justify-content-center">
+                    <img src="{{ img_imdb }}" alt="Movie" class="pt-2 img-fluid" style="height: 600px;">
                 </div>
-                {% else %}
-{#                <div class="col-md-4 d-flex justify-content-center">#}
-{#                    <img src="{{img_imdb}}" alt="Movie" class="pt-2 img-fluid" style="height: 600px;">#}
-{#                </div>#}
-                <div class="col-md-2 d-flex justify-content-center">
-                </div>
-                
-                {% endif %}
                 <div class="col-md-8" style="background-color: rgba(146, 159, 186, 0.8) ;">
-                    <div class="row d-flex justify-content-start" style="background-color: rgba(72, 77, 92, 0.8);">
-                        {% if netflix == 'NaN' or  not back %}
-                        <h2 class="font-weight-bold ml-3 mr-3" style="font-family: 'Oswald', sans-serif;
-                                text-transform: uppercase; color:#ffce00;">{{title}}
-                        </h2>
-                        <a href="{{link}}" target="_blank" class="btn-sm">
-                            <i class="h3 fa fa-external-link mr-2 text-warning" aria-hidden="true"></i></a>
-                        <h4 class="oswald-font-it text-warning">
-                            {% if toggle %}
-                                
-                            {% else %}
-                                {{release_date}}
-                            {% endif %}
-                        </h4>
-
+                    <div class="row d-flex justify-content-start"
+                         style="background-color: rgba(72, 77, 92, 0.8);">
+                        {% if netflix == 'NaN' or not back %}
+                            <h2 class="font-weight-bold ml-3 mr-3" style="font-family: 'Oswald', sans-serif;
+                                text-transform: uppercase; color:#ffce00;">{{ title }}
+                            </h2>
+                            <a href="{{ link }}" target="_blank" class="btn-sm">
+                                <i class="h3 fa fa-external-link mr-2 text-warning" aria-hidden="true"></i>
+                            </a>
                         {% else %}
-                        <img src="{{logo}}" alt="" width="500" height="90" style="display: block;margin-left: auto;margin-right: auto;width: 50%;">
+                            <img src="{{ logo }}" alt="" width="500" height="90"
+                                 style="display: block;margin-left: auto;margin-right: auto;width: 50%;">
                         {% endif %}
                     </div>
                     <div class="row mt-4 text-center">
                         <div class="col">
                             <span class="h1" style="font-family: 'Anton', cursive;">
                                 <i class="far fa-star mr-4"></i>
-                                {{rating}}
+                                {{ rating }}
                             </span>
                         </div>
                         <div class="col">
                             <span class="h1" style="font-family: 'Anton', cursive;">
                                 <i class="fas fa-poll mr-4"></i>
-                                {{noOfRating}}
+                                {{ noOfRating }}
                             </span>
                         </div>
                     </div>
@@ -84,33 +57,37 @@ will comparatively give faster results as all the data will come from the Web. I
                         <div class="col">
                             <span class="h1" style="font-family: 'Anton', cursive;">
                                 <i class="fas fa-clock mr-4"></i>
-                                {{runtime}}
+                                {{ runtime }}
                             </span>
                         </div>
                         <div class="col">
                             <span class="h1" style="font-family: 'Anton', cursive;">
                                 <i class="fas fa-film mr-4"></i>
-                                {{mtype}}
+                                {{ mtype }}
                             </span>
                         </div>
                     </div>
                     <div class="row mt-4 text-center">
                         <div class="col">
-                            <h6 class="text-uppercase" style="font-family: 'Oswald', sans-serif; background-color: rgba(72, 77, 92, 0.8); color:#ffce00;">Genre</h6>
+                            <h6 class="text-uppercase"
+                                style="font-family: 'Oswald', sans-serif; background-color: rgba(72, 77, 92, 0.8); color:#ffce00;">
+                                Genre</h6>
                             {% for genre1 in genreonebyone %}
-                            <span class="h6" style="font-family: 'Anton', cursive;">
-                                {{genre1}}
+                                <span class="h6" style="font-family: 'Anton', cursive;">
+                                {{ genre1 }}
                             </span>
-                            <br>
+                                <br>
                             {% endfor %}
                         </div>
                         <div class="col">
-                            <h6 class="text-uppercase" style="font-family: 'Oswald', sans-serif; background-color: rgba(72, 77, 92, 0.8); color:#ffce00;">Stars</h6>
+                            <h6 class="text-uppercase"
+                                style="font-family: 'Oswald', sans-serif; background-color: rgba(72, 77, 92, 0.8); color:#ffce00;">
+                                Stars</h6>
                             {% for stars1 in starsList %}
-                            <span class="h6" style="font-family: 'Anton', cursive;">
-                                {{stars1}}
+                                <span class="h6" style="font-family: 'Anton', cursive;">
+                                {{ stars1 }}
                             </span>
-                            <br>
+                                <br>
                             {% endfor %}
                         </div>
                     </div>
@@ -119,24 +96,25 @@ will comparatively give faster results as all the data will come from the Web. I
                             <span>
                                 <h6 class="text-uppercase"
                                     style="font-family: 'Oswald', sans-serif; background-color: rgba(72, 77, 92, 0.8);
-                                     color:#ffce00;">Discription</h6>
-                                <h6 style="font-family: 'Anton', cursive;">{{desp}}</h6>
+                                     color:#ffce00;">Description</h6>
+                                <h6 style="font-family: 'Anton', cursive;">{{ desp }}</h6>
                             </span>
                         </div>
                     </div>
                     <div class="row mt-4 text-center">
                         <div class="col">
                             <span>
-                                <h6 class="text-uppercase" style="font-family: 'Oswald', sans-serif; background-color: rgba(72, 77, 92, 0.8); color:#ffce00;">Available on</h6>
+                                <h6 class="text-uppercase"
+                                    style="font-family: 'Oswald', sans-serif; background-color: rgba(72, 77, 92, 0.8); color:#ffce00;">Available on</h6>
                                 {% if netflix != 'NaN' %}
-                                <a href="{{netflix}}" target="_blank"
-                                   class="btn btn-outline-danger waves-effect"><i class="fa fa-play mr-2"
-                                                                                  aria-hidden="true"></i>Netflix
+                                    <a href="{{ netflix }}" target="_blank"
+                                       class="btn btn-outline-danger waves-effect"><i class="fa fa-play mr-2"
+                                                                                      aria-hidden="true"></i>Netflix
                                 </a>
                                 {% else %}
-                                <a href="{{netflix}}" target="_blank"
-                                   class="btn btn-outline-danger waves-effect disabled"><i class="fa fa-play mr-2"
-                                                                                           aria-hidden="true"></i>Netflix
+                                    <a href="{{ netflix }}" target="_blank"
+                                       class="btn btn-outline-danger waves-effect disabled"><i class="fa fa-play mr-2"
+                                                                                               aria-hidden="true"></i>Netflix
                                 </a>
                                 {% endif %}
                             </span>
@@ -144,20 +122,7 @@ will comparatively give faster results as all the data will come from the Web. I
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-    {% else %}
-        <div class="text-uppercase robotoBold">
-            <a class="" href="#" onclick="goBack()" id="revealonhover">
-                <div class="d-flex justify-content-center">
-                    <h2><i class="fa fa-angle-double-left"></i><span class="reveal d-none ml-3 animate__animated">Back</span></h2>
-                </div>
-            </a>
-            <h2 class="text-uppercase h2 text-danger robotoBold text-center">{{notpresent}}</h2>
-        </div>
-    </div>
-    {% endif %}
-{% endif %}
 {% endblock %}
 
