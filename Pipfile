@@ -6,15 +6,15 @@ name = "pypi"
 [packages]
 django = "*"
 pandas = "*"
+numpy = "==1.19.3"
 requests = "*"
 django-crispy-forms = "*"
 matplotlib = "*"
 joblib = "*"
 scikit-learn = "*"
-numpy = "==1.19.3"
 bs4 = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.9"
+python_version = "3.7"
