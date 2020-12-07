@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block chat_component %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div id="user-list" class="list-group text-capitalize">
+                    <a href="" class="list-group-item">
+                        <h4 class="robotoBold text-warning">Users</h4>
+                        {# Users go here #}
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-8 secondary-bg-fade pb-2">
+                <div class="panel panel-info">
+                    <div>
+                        <h2 class="roboto white-text p-2">Chat</h2>
+                    </div>
+                    <div>
+                        <div id="initial" class="initial-text d-none">
+                            <h2 class="text-capitalize robotoBold text-warning px-4">
+                                Select a user from the menu and directly start chatting with that user.
+                            </h2>
+                        </div>
+                        <ul id="messages" class="messages">
+                            {# Messages go here #}
+                        </ul>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="input-group">
+                            <input id="chat-input" type="text"
+                                   class="form-control mt-2"
+                                   placeholder="Type your message here ..."
+                                   maxlength="500">
+                            <span class="input-group-btn">
+                            <button class="btn btn-md btn-outline-warning mt-2"
+                                    id="btn-send">
+                                Send
+                            </button>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let sessionKey = '{{ request.session.session_key }}';
+        let currentUser = '{{ request.user.username }}';
+
+        let currentRecipient = '';
+        let chatInput = $('#chat-input');
+        let chatButton = $('#btn-send');
+        let userList = $('#user-list');
+        let messageList = $('#messages');
+
+
+        function initialPage() {
+            if (currentRecipient === '') {
+                $('.initial-text').removeClass('d-none')
+                $('.messages').addClass('d-none')
+            }
+            else {
+                $('.initial-text').addClass('d-none')
+                $('.messages').removeClass('d-none')
+            }
+        }
+
+
+        function updateUserList() {
+            $.getJSON('api/v1/user/', function (data) {
+                userList.children('.user').remove();
+                {# Add Users #}
+                for (let i = 0; i < data.length; i++) {
+                    const userItem = `<a class="list-group-item user">${data[i]['username']}</a>`;
+                    $(userItem).appendTo('#user-list');
+                }
+                {# Add/ Remove Active Class #}
+                $('.user').click(function () {
+                    userList.children('.active').removeClass('active').removeClass('white-text');
+                    let selected = event.target;
+                    $(selected).addClass('active white-text');
+                    setCurrentRecipient(selected.text);
+                });
+            });
+        }
+
+        function drawMessage(message) {
+            let position = 'left';
+            const date = new Date(message.timestamp);
+            if (message.user === currentUser) position = 'right';
+            const messageItem = `
+            <li class="message ${position}">
+                <div class="avatar">${message.user}</div>
+                    <div class="text_wrapper">
+                        <div class="text">${message.body}<br>
+                            <span class="small">${date.toLocaleString()}</span>
+                    </div>
+                </div>
+            </li>`;
+            $(messageItem).appendTo('#messages');
+        }
+
+        function getConversation(recipient) {
+            $.getJSON(`/chat/api/v1/message/?target=${recipient}`, function (data) {
+                messageList.children('.message').remove();
+                for (let i = data['results'].length - 1; i >= 0; i--) {
+                    drawMessage(data['results'][i]);
+                }
+                messageList.animate({scrollTop: messageList.prop('scrollHeight')});
+            });
+
+        }
+
+        function getMessageById(message) {
+            id = JSON.parse(message).message
+            $.getJSON(`/chat/api/v1/message/${id}/`, function (data) {
+                if (data.user === currentRecipient ||
+                    (data.recipient === currentRecipient && data.user === currentUser)) {
+                    drawMessage(data);
+                }
+                messageList.animate({scrollTop: messageList.prop('scrollHeight')});
+            });
+        }
+
+        function sendMessage(recipient, body) {
+            console.log(recipient, body);
+            $.post('/chat/api/v1/message/', {
+                recipient: recipient,
+                body: body
+            }).fail(function () {
+                alert('Error! Check console!');
+            });
+        }
+
+        function setCurrentRecipient(username) {
+            currentRecipient = username;
+            getConversation(currentRecipient);
+            enableInput();
+            initialPage();
+        }
+
+
+        function enableInput() {
+            chatInput.prop('disabled', false);
+            chatButton.prop('disabled', false);
+            chatInput.focus();
+        }
+
+        function disableInput() {
+            chatInput.prop('disabled', true);
+            chatButton.prop('disabled', true);
+        }
+
+        $(document).ready(function () {
+            updateUserList();
+            disableInput();
+            initialPage();
+
+//    let socket = new WebSocket(`ws://127.0.0.1:8000/?session_key=${sessionKey}`);
+            var socket = new WebSocket(
+                'ws://' + window.location.host +
+                '/ws?session_key=${sessionKey}')
+
+            console.log(socket)
+
+            chatInput.keypress(function (e) {
+                if (e.keyCode === 13)
+                    chatButton.click();
+            });
+
+            chatButton.click(function () {
+                if (chatInput.val().length > 0) {
+                    sendMessage(currentRecipient, chatInput.val());
+                    chatInput.val('');
+                }
+            });
+
+            socket.onmessage = function (e) {
+                getMessageById(e.data);
+            };
+        });
+
+
+    </script>
+
+
+{% endblock %}
